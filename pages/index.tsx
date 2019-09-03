@@ -4,12 +4,14 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 
 type Props = {
+    id?: string
     title?: string
 }
 const PostLink: FunctionComponent<Props> = (props) => (
     <li>
-        <Link href={`/post?title=${props.title}`}>
-            <a>{props.title}</a>
+        {/* <Link href={`/post?title=${props.title}`}> */}
+        <Link href="/p/[id]" as={`/p/${props.id}`}>
+            <a>{props.id}</a>
         </Link>
     </li>
 )
@@ -20,9 +22,9 @@ const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
         <small>user agent {userAgent}</small>
         <hr />
         <ul>
-            <PostLink title="hello01"></PostLink>
-            <PostLink title="hello02"></PostLink>
-            <PostLink title="hello03"></PostLink>
+            <PostLink id="hello01"></PostLink>
+            <PostLink id="hello-02"></PostLink>
+            <PostLink id="hello--03"></PostLink>
         </ul>
     </Layout>
 )
