@@ -1,11 +1,6 @@
 import { NextPage } from 'next'
-import Header from '../components/Header'
-import Layout from '../components/Layout'
+import { withLayout } from '../components/Layout'
 
-const About: NextPage = () => (
-    <Layout>
-        <p>This is the about Page</p>
-    </Layout>
-)
+const About: NextPage = () => <p>This is the about Page</p>
 
-export default About
+export default withLayout(About)

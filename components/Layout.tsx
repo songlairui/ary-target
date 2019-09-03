@@ -19,3 +19,10 @@ const Layout: FunctionComponent<Props> = (props) => (
 )
 
 export default Layout
+
+export const withLayout = (Page: FunctionComponent) => () => (
+    <div style={layoutStyle}>
+        <Header />
+        <Page />
+    </div>
+)
