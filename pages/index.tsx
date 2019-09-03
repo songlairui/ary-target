@@ -1,13 +1,13 @@
 import { NextPage } from 'next'
 
 import Header from '../components/Header'
+import Layout from '../components/Layout'
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-    <div>
-        <Header />
+    <Layout>
         <h1>Hello world!</h1>
         <small>user agent {userAgent}</small>
-    </div>
+    </Layout>
 )
 
 Home.getInitialProps = async ({ req }) => {

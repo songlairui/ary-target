@@ -1,11 +1,11 @@
 import { NextPage } from 'next'
 import Header from '../components/Header'
+import Layout from '../components/Layout'
 
 const About: NextPage = () => (
-    <div>
-        <Header />
+    <Layout>
         <p>This is the about Page</p>
-    </div>
+    </Layout>
 )
 
 export default About
