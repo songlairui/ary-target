@@ -13,18 +13,31 @@ type Entry = {
     show: Show
 }
 
-// type Props = {
-//     id?: string
-//     title?: string
-// }
-// const PostLink: FunctionComponent<Props> = (props) => (
-//     <li>
-//         {/* <Link href={`/post?title=${props.title}`}> */}
-//         <Link href="/p/[id]" as={`/p/${props.id}`}>
-//             <a>{props.id}</a>
-//         </Link>
-//     </li>
-// )
+type Props = {
+    name: string
+    id?: string
+    title?: string
+}
+const PostLink: FunctionComponent<Props> = (props) => (
+    <li>
+        {/* <Link href={`/post?title=${props.title}`}> */}
+        <Link href="/p/[id]" as={`/p/${props.id}`}>
+            <a>{props.name}</a>
+        </Link>
+        <style jsx>{`
+            li {
+                list-style: none;
+                margin: 5px 0;
+            }
+            a {
+                color: blue;
+            }
+            a:hover {
+                opacity: 0.6;
+            }
+        `}</style>
+    </li>
+)
 
 const Home: NextPage<{ userAgent: string; shows: Show[] }> = ({
     userAgent,
@@ -36,16 +49,22 @@ const Home: NextPage<{ userAgent: string; shows: Show[] }> = ({
         <hr />
         <ul>
             {shows.map((show) => (
-                <li key={show.id}>
-                    <Link href="/p/[id]" as={`/p/${show.id}`}>
-                        <a>{show.name}</a>
-                    </Link>
-                </li>
+                <PostLink
+                    key={show.id}
+                    id={show.id}
+                    name={show.name}
+                ></PostLink>
             ))}
-            {/* <PostLink id="hello01"></PostLink>
-            <PostLink id="hello-02"></PostLink>
-            <PostLink id="hello--03"></PostLink> */}
         </ul>
+        <style jsx>{`
+            h1,
+            a {
+                font-family: 'Arial';
+            }
+            ul {
+                padding: 0;
+            }
+        `}</style>
     </Layout>
 )
 
