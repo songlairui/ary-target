@@ -1,7 +1,16 @@
 import { NextPage } from 'next'
+import Link from 'next/link'
 
 const Home: NextPage<{ userAgent: string }> = ({ userAgent }) => (
-    <h1>Hello world! - user agent {userAgent}</h1>
+    <header>
+        <h1>Hello world!</h1>
+        <small>user agent {userAgent}</small>
+        <nav>
+            <Link href="/about">
+                <a title="about page">About Page</a>
+            </Link>
+        </nav>
+    </header>
 )
 
 Home.getInitialProps = async ({ req }) => {
