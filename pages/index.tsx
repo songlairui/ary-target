@@ -13,18 +13,18 @@ type Entry = {
     show: Show
 }
 
-type Props = {
-    id?: string
-    title?: string
-}
-const PostLink: FunctionComponent<Props> = (props) => (
-    <li>
-        {/* <Link href={`/post?title=${props.title}`}> */}
-        <Link href="/p/[id]" as={`/p/${props.id}`}>
-            <a>{props.id}</a>
-        </Link>
-    </li>
-)
+// type Props = {
+//     id?: string
+//     title?: string
+// }
+// const PostLink: FunctionComponent<Props> = (props) => (
+//     <li>
+//         {/* <Link href={`/post?title=${props.title}`}> */}
+//         <Link href="/p/[id]" as={`/p/${props.id}`}>
+//             <a>{props.id}</a>
+//         </Link>
+//     </li>
+// )
 
 const Home: NextPage<{ userAgent: string; shows: Show[] }> = ({
     userAgent,
