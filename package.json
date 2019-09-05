@@ -26,6 +26,7 @@
     "next": "^9.0.5",
     "null-loader": "^3.0.0",
     "react": "^16.9.0",
+    "react-blocks": "^1.1.4",
     "react-dom": "^16.9.0",
     "react-markdown": "^4.2.1",
     "styled-jsx": "^3.2.2"
