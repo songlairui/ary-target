@@ -16,7 +16,6 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@apollo/react-ssr": "^3.0.1",
-    "@types/antd": "^1.0.0",
     "@types/styled-jsx": "^2.2.8",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
