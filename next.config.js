@@ -3,6 +3,10 @@ const fetch = require('isomorphic-unfetch')
 const lessToJs = require('less-vars-to-js')
 const fs = require('fs')
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
+
+const ENV = process.env.ENV.trim()
+const envFile = ENV ? `.env.${ENV}` : '.env'
 
 const themeVariables = lessToJs(
     fs.readFileSync(path.resolve(__dirname, './assets/antd-custom.less'), 'utf8')
@@ -14,6 +18,11 @@ module.exports = withLess({
         modifyVars: themeVariables, // make your antd custom effective
     },
     webpack: (config, { isServer }) => {
+        config.plugins = config.plugins || []
+        config.plugins.push(new Dotenv({
+            path: path.join(__dirname, envFile),
+            systemvars: true
+        }))
         if (isServer) {
             const antStyles = /antd\/.*?\/style.*?/
             const origExternals = [...config.externals]

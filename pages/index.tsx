@@ -29,7 +29,7 @@ export default () => (
     </Layout>
     <Footer style={{ textAlign: "center", backgroundColor: "#fff" }}>
       {/* ©2019 Songlairui */}
-      {""}
+      {process.env.L}
     </Footer>
     <style jsx global>
       {`
