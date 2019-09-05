@@ -1,82 +1,69 @@
-import { NextPage } from 'next'
-import { FunctionComponent } from 'react'
-import Link from 'next/link'
-import Layout from '../components/Layout'
-import fetch from 'isomorphic-unfetch'
+import {
+  Form,
+  Select,
+  InputNumber,
+  DatePicker,
+  Switch,
+  Slider,
+  Button
+} from "antd";
 
-type Show = {
-    id: string
-    name: string
-}
+const FormItem = Form.Item;
+const Option = Select.Option;
 
-type Entry = {
-    show: Show
-}
+export default () => (
+  <div style={{ marginTop: 100 }}>
+    <Form layout="horizontal">
+      <FormItem
+        label="Input Number"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 8 }}
+      >
+        <InputNumber
+          size="large"
+          min={1}
+          max={10}
+          style={{ width: 100 }}
+          defaultValue={3}
+          name="inputNumber"
+        />
+        <a href="#">Link</a>
+      </FormItem>
 
-type Props = {
-    name: string
-    id?: string
-    title?: string
-}
-const PostLink: FunctionComponent<Props> = (props) => (
-    <li>
-        {/* <Link href={`/post?title=${props.title}`}> */}
-        <Link href="/p/[id]" as={`/p/${props.id}`}>
-            <a>{props.name}</a>
-        </Link>
-        <style jsx>{`
-            li {
-                list-style: none;
-                margin: 5px 0;
-            }
-            a {
-                color: blue;
-            }
-            a:hover {
-                opacity: 0.6;
-            }
-        `}</style>
-    </li>
-)
+      <FormItem label="Switch" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
+        <Switch defaultChecked />
+      </FormItem>
 
-const Home: NextPage<{ userAgent: string; shows: Show[] }> = ({
-    userAgent,
-    shows
-}) => (
-    <Layout>
-        <h1>Hello world!</h1>
-        <small>user agent {userAgent}</small>
-        <hr />
-        <ul>
-            {shows.map((show) => (
-                <PostLink
-                    key={show.id}
-                    id={show.id}
-                    name={show.name}
-                ></PostLink>
-            ))}
-        </ul>
-        <style jsx>{`
-            h1,
-            a {
-                font-family: 'Arial';
-            }
-            ul {
-                padding: 0;
-            }
-        `}</style>
-    </Layout>
-)
+      <FormItem label="Slider" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
+        <Slider defaultValue={70} />
+      </FormItem>
 
-Home.getInitialProps = async ({ req }) => {
-    const userAgent = req
-        ? req.headers['user-agent'] || ''
-        : navigator.userAgent
+      <FormItem label="Select" labelCol={{ span: 8 }} wrapperCol={{ span: 8 }}>
+        <Select size="large" defaultValue="lucy" style={{ width: 192 }}>
+          <Option value="jack">jack</Option>
+          <Option value="lucy">lucy</Option>
+          <Option value="disabled" disabled>
+            disabled
+          </Option>
+          <Option value="yiminghe">yiminghe</Option>
+        </Select>
+      </FormItem>
 
-    const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
-    const data: Entry[] = await res.json()
-    console.log(`Show data fetched. Count: ${data.length}`)
-
-    return { userAgent, shows: data.map((entry) => entry.show) }
-}
-export default Home
+      <FormItem
+        label="DatePicker"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 8 }}
+      >
+        <DatePicker name="startDate" />
+      </FormItem>
+      <FormItem style={{ marginTop: 48 }} wrapperCol={{ span: 8, offset: 8 }}>
+        <Button size="large" type="primary" htmlType="submit">
+          OK
+        </Button>
+        <Button size="large" style={{ marginLeft: 8 }}>
+          Cancel
+        </Button>
+      </FormItem>
+    </Form>
+  </div>
+);
