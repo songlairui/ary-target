@@ -5,7 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const Dotenv = require('dotenv-webpack')
 
-const ENV = process.env.ENV.trim()
+const ENV = process.env.ENV
 const envFile = ENV ? `.env.${ENV}` : '.env'
 
 const themeVariables = lessToJs(
