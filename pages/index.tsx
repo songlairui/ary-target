@@ -10,7 +10,10 @@ const MenuItems = [
 const b = <Tag color="geekblue">~~</Tag>;
 
 export default () => (
-  <MainLayout header={<Tag color="geekblue">~~</Tag>}>
+  <MainLayout
+    header={<Tag color="geekblue">~~</Tag>}
+    style={{ flexDirection: "row" }}
+  >
     {MenuItems.map((item, idx) => (
       <Card key={idx} style={{ maxWidth: 300, margin: "5px" }} bordered={false}>
         <Link href={item[0]}>

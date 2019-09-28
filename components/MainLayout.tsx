@@ -37,6 +37,7 @@ const MainLayout: FunctionComponent<Props> = props => (
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
+          minWidth: 360,
           ...props.style
         }}
       >
