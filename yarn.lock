@@ -859,13 +859,6 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@types/antd@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npm.taobao.org/@types/antd/download/@types/antd-1.0.0.tgz#f04e2a84efd9ea937366cd3dfbada5d3c949471d"
-  integrity sha1-8E4qhO/Z6pNzZs09+62l08lJRx0=
-  dependencies:
-    antd "*"
-
 "@types/node@>=6":
   version "12.7.4"
   resolved "https://registry.npm.taobao.org/@types/node/download/@types/node-12.7.4.tgz?cache=0&sync_timestamp=1567537168246&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Fnode%2Fdownload%2F%40types%2Fnode-12.7.4.tgz#64db61e0359eb5a8d99b55e05c729f130a678b04"
@@ -1207,7 +1200,7 @@ ansi-styles@^3.2.1:
   dependencies:
     color-convert "^1.9.0"
 
-antd@*, antd@^3.23.1:
+antd@^3.23.1:
   version "3.23.1"
   resolved "https://registry.npm.taobao.org/antd/download/antd-3.23.1.tgz#a251b0cdc2072a91a8c157f8b31de8ad92ce5d18"
   integrity sha1-olGwzcIHKpGowVf4sx3orZLOXRg=
