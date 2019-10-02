@@ -9,7 +9,7 @@ import { NextPage, NextPageContext } from "next";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-const HTTP_URL = "https://boat.songlairui.cn/graphql";
+const HTTP_URL = process.env.GQL_URL || "https://boat.songlairui.cn/graphql";
 
 type Payload = {
   apolloClient: any;

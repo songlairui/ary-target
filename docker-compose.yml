@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  target.s:
+    image: songlairui/target
+    ports:
+      - 23000:3000
+    volumes:
+      - ./.env:/app/.env
