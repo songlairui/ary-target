@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { List, Row, Col, Affix, Button } from "antd";
+import { List, Button } from "antd";
 import { NetworkStatus } from "apollo-client";
 import { useQuery } from "@apollo/react-hooks";
 import { withApollo } from "../lib/apollo";
