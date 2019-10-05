@@ -17,7 +17,7 @@ export const removeCookie = (key: string) => {
   }
 };
 
-export const getCookie = (key: string, allCookie: string) => {
+export const getCookie = (key: string, allCookie: string = "") => {
   return process.browser
     ? getCookieFromBrowser(key)
     : getCookieFromRawCookie(key, allCookie);
