@@ -7,6 +7,7 @@ const { Header, Content, Footer } = Layout;
 type Props = {
   title?: string;
   header?: JSX.Element;
+  subFooter?: JSX.Element;
   style?: CSSProperties;
 };
 
@@ -44,6 +45,9 @@ const MainLayout: FunctionComponent<Props> = props => (
         {props.children}
       </Content>
     </Layout>
+    {props.subFooter ? (
+      <div className="sub-footer">{props.subFooter}</div>
+    ) : null}
     <Footer
       style={{
         textAlign: "center",

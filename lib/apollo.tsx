@@ -9,7 +9,8 @@ import { NextPage, NextPageContext } from "next";
 
 let apolloClient: ApolloClient<NormalizedCacheObject>;
 
-const HTTP_URL = process.env.GQL_URL || "https://self-answer.songlairui.cn/graphql";
+const HTTP_URL =
+  process.env.GQL_URL || "https://self-answer.songlairui.cn/graphql";
 
 type Payload = {
   apolloClient: any;
@@ -30,7 +31,10 @@ interface unionCtx extends NextPageContext {
  * @param {Object} [config]
  * @param {Boolean} [config.ssr=true]
  */
-export function withApollo(PageComponent: NextPage, { ssr = true } = {}) {
+export function withApollo(
+  PageComponent: NextPage<any, any>,
+  { ssr = true } = {}
+) {
   const WithApollo = (payload: Payload) => {
     const { apolloClient, apolloState, ...pageProps } = payload;
     const client = useMemo(
@@ -58,6 +62,7 @@ export function withApollo(PageComponent: NextPage, { ssr = true } = {}) {
 
   if (ssr || PageComponent.getInitialProps) {
     WithApollo.getInitialProps = async (ctx: unionCtx) => {
+      let rawCookie = "";
       const { AppTree } = ctx;
       // Initialize ApolloClient, add it to the ctx object so
       // we can use it in `PageComponent.getInitialProp`.
@@ -76,6 +81,8 @@ export function withApollo(PageComponent: NextPage, { ssr = true } = {}) {
         if (ctx.res && ctx.res.finished) {
           return pageProps;
         }
+        const { req = { headers: { cookie: "" } } } = ctx;
+        rawCookie = req.headers.cookie || "";
 
         // Only if ssr is enabled
         if (ssr) {
@@ -108,7 +115,8 @@ export function withApollo(PageComponent: NextPage, { ssr = true } = {}) {
 
       return {
         ...pageProps,
-        apolloState
+        apolloState,
+        rawCookie
       };
     };
   }
