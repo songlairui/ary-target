@@ -1,4 +1,5 @@
 # docker build -t songlairui/target .
+# registry.cn-zhangjiakou.aliyuncs.com/rv/target:0.0.x
 # Do the npm install or yarn install in the full image
 # FROM mhart/alpine-node AS depend-dev
 FROM node:stretch-slim AS depend-dev
