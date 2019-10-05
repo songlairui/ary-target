@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 
-export const HOST = process.env.API_URL || "xx";
+export const HOST = process.env.API_URL || "https://self-answer.songlairui.cn";
 export const AUTH_KEY = "AUTH_TOKEN";
 export const LAST_USERNAME = "LAST_USERNAME";
 export const CURRENT_USERNAME = "CURRENT_USERNAME";
