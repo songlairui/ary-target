@@ -6,17 +6,10 @@ export const AUTH_KEY = "AUTH_TOKEN";
 export const LAST_USERNAME = "LAST_USERNAME";
 export const CURRENT_USERNAME = "CURRENT_USERNAME";
 
-export const isServer = typeof window === "undefined";
-
 export const v1 = (str: string) => `${HOST}/api/v1/${str}`;
 
 export const getAuthHeader = (rawCookie?: string) => {
-  let token: string | null;
-  if (isServer) {
-    token = null;
-  } else {
-    token = getCookie(AUTH_KEY, rawCookie) || "";
-  }
+  const token = getCookie(AUTH_KEY, rawCookie);
   return token ? { Authorization: `Bearer ${token}` } : null;
 };
 
