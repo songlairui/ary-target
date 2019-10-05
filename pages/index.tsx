@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { Card, Button, Tag } from "antd";
 import MainLayout from "../components/MainLayout";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+import { withApollo } from "../lib/apollo";
 
 const MenuItems = [
   ["/zero", "Zero"],
@@ -9,19 +12,54 @@ const MenuItems = [
 ];
 const b = <Tag color="geekblue">~~</Tag>;
 
-export default () => (
-  <MainLayout
-    header={<Tag color="geekblue">~~</Tag>}
-    style={{ flexDirection: "row" }}
-  >
-    {MenuItems.map((item, idx) => (
-      <Card key={idx} style={{ maxWidth: 300, margin: "5px" }} bordered={false}>
-        <Link href={item[0]}>
-          <Button type="link" block>
-            {item[1] || item[0]}
-          </Button>
-        </Link>
-      </Card>
-    ))}
-  </MainLayout>
-);
+type FirstItem = {
+  id: string;
+  icon: string;
+  title: string;
+  desc: string;
+  hidden: boolean;
+  createdAt: Date;
+  links: string;
+};
+
+const ALL_FIRST = gql`
+  {
+    api_first {
+      id
+      icon
+      title
+      desc
+      hidden
+      createdAt
+      links
+    }
+  }
+`;
+
+const Home = function() {
+  const { loading, error, data, refetch } = useQuery(ALL_FIRST);
+  const { api_first: menuItems = [] }: { api_first: FirstItem[] } = data || {};
+
+  return (
+    <MainLayout
+      header={<Tag color="geekblue">~~</Tag>}
+      style={{ flexDirection: "row" }}
+    >
+      {menuItems.map((item, idx) => (
+        <Card
+          key={idx}
+          style={{ maxWidth: 300, margin: "5px" }}
+          bordered={false}
+        >
+          <Link href={item.links || "/"}>
+            <Button type="link" block>
+              {item.title}
+            </Button>
+          </Link>
+        </Card>
+      ))}
+    </MainLayout>
+  );
+};
+
+export default withApollo(Home);

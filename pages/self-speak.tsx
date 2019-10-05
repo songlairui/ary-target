@@ -4,7 +4,8 @@ import Router from "next/router";
 
 const data: string[] = [
   "其实，我想要我做的事情有进度感",
-  "Actually, I have a sense of advancement"
+  "Actually, I have a sense of advancement",
+  "Life mission: my intelligence am the base level for all scene"
 ];
 
 export default () => (
