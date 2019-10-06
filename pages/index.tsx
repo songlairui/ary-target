@@ -1,5 +1,15 @@
 import Link from "next/link";
-import { Card, Button, Tag, Input, Col, Row, Popover, Switch } from "antd";
+import {
+  Card,
+  Button,
+  Tag,
+  Input,
+  Col,
+  Row,
+  Popover,
+  Switch,
+  Radio
+} from "antd";
 import MainLayout from "../components/MainLayout";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -9,7 +19,7 @@ import { CURRENT_USERNAME, LAST_USERNAME } from "../lib/api/common";
 import { login, logout, whoami } from "../lib/api/auth";
 import { NextPage } from "next";
 import { getCookie } from "../lib/session";
-import { createFirstItem, FirstItemDto } from "../lib/api/first";
+import { createFirstItem, FirstItemDto, ItemType } from "../lib/api/first";
 
 const MenuItems = [
   ["/zero", "Zero"],
@@ -25,6 +35,7 @@ type FirstItem = {
   hidden: boolean;
   createdAt: Date;
   links: string;
+  itemType: ItemType;
 };
 
 const ALL_FIRST = gql`
@@ -37,6 +48,7 @@ const ALL_FIRST = gql`
       hidden
       createdAt
       links
+      itemType
     }
   }
 `;
@@ -53,13 +65,14 @@ const AddFirstItem = function({ onSubmit }: { onSubmit?: Function }) {
   });
 
   const [hidden, setHidden] = useState(false);
+  const [itemType, setItemType] = useState("SUBPAGE");
   const submit = function() {
     const payload = states.reduce(
       (result, { key, val }) => {
         result[key] = val;
         return result;
       },
-      { hidden } as Dict
+      { hidden, itemType } as Dict
     );
     onSubmit && onSubmit(payload);
   };
@@ -81,6 +94,15 @@ const AddFirstItem = function({ onSubmit }: { onSubmit?: Function }) {
             setHidden(!e);
           }}
         />
+        <Radio.Group
+          onChange={e => setItemType(e.target.value)}
+          value={itemType}
+        >
+          <Radio value={ItemType.SUBPAGE}>{ItemType.SUBPAGE}</Radio>
+          <Radio value={ItemType.HREF}>{ItemType.HREF}</Radio>
+          <Radio value={ItemType.NORMAL}>{ItemType.NORMAL}</Radio>
+          <Radio value={ItemType._M}>{ItemType._M}</Radio>
+        </Radio.Group>
         <Button onClick={submit}>Submit</Button>
       </Col>
     </Row>
