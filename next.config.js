@@ -1,5 +1,4 @@
 const withLess = require('@zeit/next-less')
-const fetch = require('isomorphic-unfetch')
 const lessToJs = require('less-vars-to-js')
 const fs = require('fs')
 const path = require('path')
@@ -52,8 +51,7 @@ module.exports = withLess({
             '/': { page: '/' },
             '/about': { page: '/about' }
         }
-        const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
-        const data = await res.json()
+        const data = []
         const shows = data.map(entry => entry.show)
         shows.forEach(show => {
             paths[`/p/${show.id}`] = {
