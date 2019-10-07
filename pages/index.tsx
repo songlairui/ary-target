@@ -4,14 +4,18 @@ import MainLayout from "../components/MainLayout";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { withApollo } from "../lib/apollo";
-import { useState, useRef } from "react";
+import { useState, useRef, FunctionComponent } from "react";
 import { CURRENT_USERNAME, LAST_USERNAME } from "../lib/api/common";
 import { login, logout, whoami } from "../lib/api/auth";
 import { NextPage } from "next";
 import { getCookie } from "../lib/session";
 import { createFirstItem } from "../lib/api/first";
 import AddFirstItem from "../components/home/AddFirstItem";
-import { FirstItem, FirstItemDto } from "../interfaces/home.interface";
+import {
+  FirstItem,
+  FirstItemDto,
+  ItemType
+} from "../interfaces/home.interface";
 
 const ALL_FIRST = gql`
   {
@@ -44,6 +48,36 @@ const Home: NextPage<{ rawCookie: string }> = function({ rawCookie }) {
 
   const rereadCurrent = () =>
     setCurUsername(getCookie(CURRENT_USERNAME, rawCookie));
+
+  const InnerItem: FunctionComponent<{ item: FirstItem }> = ({ item }) => {
+    switch (item.itemType) {
+      case ItemType._M:
+        return (
+          <Button type="link" block>
+            {item.title}
+          </Button>
+        );
+      case ItemType.HREF:
+        return <a href={item.links}>{item.title}</a>;
+      case ItemType.SUBPAGE:
+        return (
+          <Link href={item.links || "/"}>
+            <Button type="link" block>
+              {item.title}
+            </Button>
+          </Link>
+        );
+      case ItemType.NORMAL:
+      default:
+        return (
+          <Link href={`/first/${item.id}`}>
+            <Button type="link" block>
+              {item.title}
+            </Button>
+          </Link>
+        );
+    }
+  };
 
   return (
     <MainLayout
@@ -128,11 +162,7 @@ const Home: NextPage<{ rawCookie: string }> = function({ rawCookie }) {
           style={{ maxWidth: 300, margin: "5px" }}
           bordered={false}
         >
-          <Link href={item.links || "/"}>
-            <Button type="link" block>
-              {item.title}
-            </Button>
-          </Link>
+          <InnerItem item={item} />
         </Card>
       ))}
     </MainLayout>

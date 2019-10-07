@@ -33,7 +33,7 @@ interface unionCtx extends NextPageContext {
  */
 export function withApollo(
   PageComponent: NextPage<any, any>,
-  { ssr = true } = {}
+  { ssr = false } = {}
 ) {
   const WithApollo = (payload: Payload) => {
     const { apolloClient, apolloState, ...pageProps } = payload;
